@@ -1,0 +1,36 @@
+﻿<h1>People Data</h1>
+
+<p>This component demonstrates fetching People data from the server.</p>
+
+<p *ngIf="!empList"><em>Loading...</em></p>
+
+<p>
+  <a [routerLink]="['/register-People']">Create New</a>
+</p>
+
+<table class='table' *ngIf="peopleList">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>First Name</th>
+      <th>Middle Name</th>
+      <th>Sur Name</th>
+      <th>Gender</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let emp of peopleList">
+      <td>{{ emp.Id }}</td>
+      <td>{{ emp.firstName }}</td>
+      <td>{{ emp.middleName }}</td>
+      <td>{{ emp.surName }}</td>
+      <td>{{ emp.gender }}</td>
+      <td>
+      <td>
+        <a [routerLink]="['/People/edit/', emp.PeopleId]">Edit</a> |
+        <a [routerLink]="" (click)="delete(emp.PeopleId)">Delete</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
