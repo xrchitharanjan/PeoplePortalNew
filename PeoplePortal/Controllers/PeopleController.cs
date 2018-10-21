@@ -6,6 +6,7 @@ using PeoplePortal.DataAccess;
 using PeoplePortal.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PeoplePortal.ViewModel;
 
 namespace PeoplePortal.Controllers
 {
@@ -18,14 +19,16 @@ namespace PeoplePortal.Controllers
 
         [HttpGet]
         [Route("Index")]
-        public IEnumerable<People> Index()
+        public IEnumerable<PeopleDto> Index()
         {
             return ppl.GetAllPeople();
-        }
+        }        
+
         [HttpPost]
         [Route("Create")]
-        public int Create([FromBody] People People)
+        public int Create([FromBody] PeopleDto People)
         {
+            People.OrganisationId = 1;
             return ppl.AddPeople(People);
         }
 

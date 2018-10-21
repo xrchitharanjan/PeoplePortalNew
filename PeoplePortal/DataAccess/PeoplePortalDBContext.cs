@@ -2,6 +2,7 @@
 using PeoplePortal.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PeoplePortal.DataAccess
 {
@@ -9,6 +10,7 @@ namespace PeoplePortal.DataAccess
     {
         public virtual DbSet<Departments> Departments { get; set; }
         public virtual DbSet<People> People { get; set; }
+        public virtual DbSet<Images> Images { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -35,11 +37,25 @@ namespace PeoplePortal.DataAccess
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<People>(entity =>
+            modelBuilder.Entity<Images>(entity =>
             {
                 entity.HasKey(e => e.Id);
+                entity.Property(x => x.Id).ValueGeneratedOnAdd();
 
-                entity.ToTable("People");
+                entity.ToTable(nameof(Images));
+                entity.Property(e => e.FileName)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<People>(entity =>
+            {
+
+               entity.ToTable("People").HasKey(e => e.Id);
+
+                entity.Property(x => x.Id).ValueGeneratedOnAdd();
+              
 
                 entity.Property(e => e.Id).HasColumnName("Id");
 
@@ -63,6 +79,12 @@ namespace PeoplePortal.DataAccess
                     .HasMaxLength(6)
                     .IsUnicode(false);               
             });
+
+           // modelBuilder.Entity<People>()
+           //.Property(a => a.Id)
+           //.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

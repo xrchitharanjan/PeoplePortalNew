@@ -1,5 +1,5 @@
 ﻿import { Injectable, Inject } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
@@ -36,7 +36,29 @@ export class PeopleService {
         return this._http.post(this.myAppUrl + 'api/People/Create', People)
             .map((response: Response) => response.json())
             .catch(this.errorHandler)
-    }
+  }
+
+  saveImage(People) {
+    debugger;
+    let _url = this.myAppUrl + 'api/images/create';
+    let headers = new Headers({ 'Content-Type': 'multipart/form-data' });
+    let options = new RequestOptions({ headers: headers });
+    //this._http.post(_url, fileToUpload, options)
+
+
+    _url = this.myAppUrl + 'api/images/createfile';    
+    this._http.post(_url, People)
+
+    //this._http.post(this.myAppUrl + 'api/Images', fileToUpload, options)
+    //  .map((response: Response) => response.json())
+    //  .catch(this.errorHandler)
+    //let input = new FormData();
+    //input.append("file", fileToUpload);
+    //let headers = new Headers({ 'Content-Type': 'multipart/form-data' });
+    //let options = new RequestOptions({ headers: headers });
+    //return this._http
+    //  .post(this.myAppUrl + 'api/Images', fileToUpload, options);
+  }
 
     updatePeople(People) {
         return this._http.put(this.myAppUrl + 'api/People/Edit', People)
