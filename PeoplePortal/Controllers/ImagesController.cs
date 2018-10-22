@@ -25,16 +25,10 @@ namespace PeoplePortal.Controllers
             _environment = environment ?? throw new ArgumentNullException(nameof(environment));
         }
 
-        [HttpPost, DisableRequestSizeLimit]
-        [Route("test")]
-        public ActionResult test([FromBody] int abc)
-        {
-            return null;
-
-        }
+       
 
 
-        [HttpPost, DisableRequestSizeLimit]
+        [HttpPost]
         [Route("create")]
         public ActionResult Create()
         {

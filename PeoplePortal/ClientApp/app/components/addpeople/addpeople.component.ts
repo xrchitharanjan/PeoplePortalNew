@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FetchPeopleComponent } from '../fetchPeople/fetchPeople.component';
 import { PeopleService } from '../../services/peopleservice.service';
 import { ImageService } from '../../services/imageservice.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   templateUrl: './addpeople.component.html',
@@ -14,7 +15,7 @@ import { ImageService } from '../../services/imageservice.service';
 export class createPeople implements OnInit {
   PeopleForm: FormGroup;
   title: string = "Create";
-  PeopleId: number;
+  PeopleId: number = 0;
   errorMessage: any;
   ImageFile: File;
   cityList: Array<any> = [];
@@ -74,7 +75,7 @@ export class createPeople implements OnInit {
 
   saveImages(PeopleId) {
     const fd = new FormData();
-    //fd.append('PeopleId', PeopleId);
+    fd.append('PeopleId', this.PeopleId.toString());
     //fd.append('FileName', this.ImageFile.name);
     //fd.append('ImageFile', this.ImageFile);
     fd.append('ImageFile',this.ImageFile, this.ImageFile.name);
@@ -87,11 +88,11 @@ export class createPeople implements OnInit {
     this._router.navigate(['/fetch-People']);
   }
 
-  onUpload() {
+ onUpload() {
     debugger
     const fd = new FormData();
     fd.append('ImageFile', this.ImageFile, this.ImageFile.name);
-    this._ImageService.saveImage(this.PeopleForm.value)
+    this._ImageService.saveImage(fd)
       .subscribe((data) => {
         this._router.navigate(['/fetch-People']);
       }, error => this.errorMessage = error)
