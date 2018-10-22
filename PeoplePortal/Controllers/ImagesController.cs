@@ -29,8 +29,8 @@ namespace PeoplePortal.Controllers
 
 
         [HttpPost]
-        [Route("create")]
-        public ActionResult Create()
+        [Route("create/{peopleId}")]
+        public ActionResult Create(int PeopleId)
         {
             try
             {
@@ -38,7 +38,7 @@ namespace PeoplePortal.Controllers
                 string folderName = "Upload";
                 string webRootPath = _environment.WebRootPath;
                 string filePath = Path.Combine(webRootPath, folderName);
-                string fullPath = Path.Combine(filePath, files.FileName + DateTime.Now.ToString());
+                string fullPath = Path.Combine(filePath, files.FileName);
                 if (!Directory.Exists(filePath))
                 {
                     Directory.CreateDirectory(filePath);
@@ -57,13 +57,21 @@ namespace PeoplePortal.Controllers
                         {
                             ImageFile = array,
                             FileName = files.FileName,
-                            PeopleId = 15
+                            IsProfilePic = true,
+                            PeopleId = PeopleId
                         };
                         ppl.AddImages(image);
 
                         if (fullPath != null)
                         {
-                            System.IO.File.Delete(fullPath);
+                            try
+                            {
+                                System.IO.File.Delete(fullPath);
+                            }
+                            catch(Exception ex)
+                            {
+                                Console.WriteLine(ex.StackTrace);
+                            }
                         }
 
                     }
@@ -72,14 +80,15 @@ namespace PeoplePortal.Controllers
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.StackTrace);
                 throw;
             }
 
         }
 
         [HttpPost, DisableRequestSizeLimit]
-        [Route("createfile")]
-        public ActionResult CreateFile(IFormFile _file)
+        [Route("createfile/{peopleId}")]
+        public ActionResult CreateFile(int PeopleId)
         {
             try
             {
@@ -87,7 +96,7 @@ namespace PeoplePortal.Controllers
                 string folderName = "Upload";
                 string webRootPath = _environment.WebRootPath;
                 string filePath = Path.Combine(webRootPath, folderName);
-                string fullPath = Path.Combine(filePath, files.FileName + DateTime.Now.ToString());
+                string fullPath = Path.Combine(filePath, files.FileName);
                 if (!Directory.Exists(filePath))
                 {
                     Directory.CreateDirectory(filePath);
@@ -106,7 +115,8 @@ namespace PeoplePortal.Controllers
                         {
                             ImageFile = array,
                             FileName = files.FileName,
-                            PeopleId = 15
+                            PeopleId = PeopleId,
+                            IsProfilePic = false
                         };
                         ppl.AddImages(image);
 
@@ -121,6 +131,7 @@ namespace PeoplePortal.Controllers
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.StackTrace);
                 throw;
             }
 

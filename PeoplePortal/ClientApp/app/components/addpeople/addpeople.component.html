@@ -5,7 +5,7 @@
 
   <form [formGroup]="PeopleForm" (ngSubmit)="save()" #formDir="ngForm" novalidate>
 
-    <!--<div class="form-group row">
+    <div class="form-group row">
       <label class=" control-label col-md-12">First Name</label>
       <div class="col-md-4">
         <input class="form-control" type="text" formControlName="firstname">
@@ -41,7 +41,7 @@
       <span class="text-danger" *ngIf="gender.invalid && formDir.submitted">
         Gender is required
       </span>
-    </div>-->
+    </div>
 
    
 

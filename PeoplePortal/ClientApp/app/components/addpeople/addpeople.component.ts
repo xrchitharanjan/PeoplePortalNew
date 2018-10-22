@@ -61,7 +61,8 @@ export class createPeople implements OnInit {
     if (this.title == "Create") {
       this._PeopleService.savePeople(this.PeopleForm.value)
         .subscribe((data) => {
-          this.saveImages(data);
+          this.PeopleId = data;
+          this.saveImages();
           this._router.navigate(['/fetch-People']);
         }, error => this.errorMessage = error)
     }
@@ -73,14 +74,14 @@ export class createPeople implements OnInit {
     }
   }
 
-  saveImages(PeopleId) {
+  saveImages() {
+    debugger
     const fd = new FormData();
-    fd.append('PeopleId', this.PeopleId.toString());
-    //fd.append('FileName', this.ImageFile.name);
-    //fd.append('ImageFile', this.ImageFile);
-    fd.append('ImageFile',this.ImageFile, this.ImageFile.name);
-    debugger;
-    this._ImageService.saveImage(fd);
+    fd.append('ImageFile', this.ImageFile, this.ImageFile.name);
+    this._ImageService.saveImage(fd, this.PeopleId)
+      .subscribe((data) => {
+        this._router.navigate(['/fetch-People']);
+      }, error => this.errorMessage = error)
 
   }
 
@@ -91,8 +92,8 @@ export class createPeople implements OnInit {
  onUpload() {
     debugger
     const fd = new FormData();
-    fd.append('ImageFile', this.ImageFile, this.ImageFile.name);
-    this._ImageService.saveImage(fd)
+   fd.append('ImageFile', this.ImageFile, this.ImageFile.name);
+   this._ImageService.saveImage(fd, this.PeopleId)
       .subscribe((data) => {
         this._router.navigate(['/fetch-People']);
       }, error => this.errorMessage = error)

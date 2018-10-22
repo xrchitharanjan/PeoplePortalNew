@@ -13,10 +13,11 @@ export class ImageService {
     this.myAppUrl = baseUrl;
   }
 
-   saveImage(fd) {
+   saveImage(fd,peopleId) {
     debugger;
-    let _url = this.myAppUrl + 'api/images/create';
-    let headers = new Headers({ 'Content-Type': 'multipart/form-data' });    
+     let _url = this.myAppUrl + 'api/images/create/' + peopleId;
+     let headers = new Headers({ 'enctype': 'multipart/form-data' });   
+     headers.append('Accept', 'application/json');
      let options = new RequestOptions({ headers: headers });
      return this._http.post(_url, fd, options)
        .map((response: Response) => response.json());
