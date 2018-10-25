@@ -18,6 +18,7 @@ export class createPeople implements OnInit {
   PeopleId: number = 0;
   errorMessage: any;
   ImageFile: File;
+  ImageUrl: string = "";
   cityList: Array<any> = [];
 
   constructor(private _fb: FormBuilder, private _avRoute: ActivatedRoute,
@@ -75,7 +76,6 @@ export class createPeople implements OnInit {
   }
 
   saveImages() {
-    debugger
     const fd = new FormData();
     fd.append('ImageFile', this.ImageFile, this.ImageFile.name);
     this._ImageService.saveImage(fd, this.PeopleId)
@@ -90,7 +90,6 @@ export class createPeople implements OnInit {
   }
 
  onUpload() {
-    debugger
     const fd = new FormData();
    fd.append('ImageFile', this.ImageFile, this.ImageFile.name);
    this._ImageService.saveImage(fd, this.PeopleId)
@@ -107,6 +106,22 @@ export class createPeople implements OnInit {
       return;
     }   
     this.ImageFile = <File>event.target.files[0];
+    //if (event.target.files && event.target.files[0]) {
+    //  var reader = new FileReader();
+    //  reader.onload = (event: ProgressEvent) => {
+    //    this.ImageUrl = (<FileReader>event.target).result;
+    //  }
+    //}
+
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      //reader.onload = e => this.ImageUrl = (<FileReader>event.target).result;
+      reader.onload = (event:any) => {
+        this.ImageUrl = event.target.result;      }
+      reader.readAsDataURL(file);
+    }
+
   }
 
 //  getFile(file) {
