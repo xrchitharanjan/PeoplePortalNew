@@ -68,19 +68,6 @@ namespace PeoplePortal.DataAccess
             }
         }
 
-        public int AddImages(Images image)
-        {
-            try
-            {               
-                db.Images.Add(image);
-                db.SaveChanges();
-                return 1;
-            }
-            catch(Exception ex)
-            {
-                throw;
-            }
-        }
 
 
         //To Update the records of a particluar People

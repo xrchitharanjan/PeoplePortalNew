@@ -26,11 +26,15 @@
   <ItemGroup>
     <None Remove="ClientApp\app\components\addpeople\addpeople.component.ts" />
     <None Remove="ClientApp\app\components\fetchpeople\fetchpeople.component.ts" />
+    <None Remove="ClientApp\app\components\peoplelist\peoplelist.component.ts" />
+    <None Remove="ClientApp\app\components\people\people.component.ts" />
     <None Remove="ClientApp\app\Services\imageservice.service.ts" />
     <None Remove="ClientApp\app\Services\peopleservice.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\components\peoplelist\peoplelist.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\people\people.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\addpeople\addpeople.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\fetchpeople\fetchpeople.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\Services\imageservice.service.ts" />

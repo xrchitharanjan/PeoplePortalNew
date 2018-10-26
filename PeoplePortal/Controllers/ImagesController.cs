@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PeoplePortal.DataAccess;
 using PeoplePortal.Models;
+using PeoplePortal.ViewModel;
 
 namespace PeoplePortal.Controllers
 {
@@ -18,15 +19,48 @@ namespace PeoplePortal.Controllers
     [Route("api/images")]
     public class ImagesController : Controller
     {
-        PeoplePortalDataAccessLayer ppl = new PeoplePortalDataAccessLayer();
+        ImagesRepository imgsRepo = new ImagesRepository();
         private readonly IHostingEnvironment _environment;
         public ImagesController(IHostingEnvironment environment)
         {
             _environment = environment ?? throw new ArgumentNullException(nameof(environment));
         }
 
-       
+        [HttpGet]
+        [Route("profilepic/{peopleId}")]
+        public List<ImageDto> GetImages(int PeopleId)
+        {
+            var data = imgsRepo.GetAllImagesByPeople(PeopleId);
+            var result = data.Select(p => new ImageDto
+            {
+                PeopleId = p.PeopleId,
+                FileName = p.FileName,
+                Id = p.Id,
+                ImageDescription = p.ImageDescription,
+                ImageFile = Convert.ToBase64String(p.ImageFile),
+                IsProfilePic = p.IsProfilePic
+                
+            }).ToList();
+            return result;
+        }
 
+        [HttpGet]
+        [Route("allImages/{peopleId}")]
+        public List<ImageDto> GetProfilePic(int PeopleId)
+        {
+            var data = imgsRepo.GetAllImagesByPeople(PeopleId).Where(p=> p.IsProfilePic);
+            var result = data.Select(p => new ImageDto
+            {
+                PeopleId = p.PeopleId,
+                FileName = p.FileName,
+                Id = p.Id,
+                ImageDescription = p.ImageDescription,
+                ImageFile = Convert.ToBase64String(p.ImageFile),
+                IsProfilePic = p.IsProfilePic
+
+            }).ToList();
+            return result;
+        }
 
         [HttpPost]
         [Route("create/{peopleId}")]
@@ -60,7 +94,7 @@ namespace PeoplePortal.Controllers
                             IsProfilePic = true,
                             PeopleId = PeopleId
                         };
-                        ppl.AddImages(image);
+                        imgsRepo.AddImages(image);
 
                         if (fullPath != null)
                         {
@@ -68,7 +102,7 @@ namespace PeoplePortal.Controllers
                             {
                                 System.IO.File.Delete(fullPath);
                             }
-                            catch(Exception ex)
+                            catch (Exception ex)
                             {
                                 Console.WriteLine(ex.StackTrace);
                             }
@@ -118,7 +152,7 @@ namespace PeoplePortal.Controllers
                             PeopleId = PeopleId,
                             IsProfilePic = false
                         };
-                        ppl.AddImages(image);
+                        imgsRepo.AddImages(image);
 
                         if (fullPath != null)
                         {

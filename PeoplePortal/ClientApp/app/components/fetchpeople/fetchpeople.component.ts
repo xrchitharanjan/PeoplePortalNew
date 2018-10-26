@@ -8,7 +8,7 @@ import { PeopleService } from '../../services/peopleservice.service'
 })
 
 export class FetchPeopleComponent {
-  public peopleList: PeopleData[];
+  public peopleList: PeopleData[] | undefined;
 
   constructor(public http: Http, private _router: Router, private _PeopleService: PeopleService) {
     this.getPeoples();

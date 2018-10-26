@@ -1,0 +1,13 @@
+<!--<div class="list-filter">
+  <spa-product-filters [availableFilters]="filters"
+                       [activatedFilters]="activeFilters"
+                       (activeFilters)="updateActivatedFilters($event)"></spa-product-filters>
+</div>-->
+<div class="list-people">
+  <div class="list-people" *ngFor="let item of PeopleList">
+    <spa-people [id]="item.id"
+                [firstname]="item.firstname"
+                [gender]="item.gender">
+    </spa-people>
+  </div>
+</div>
