@@ -13,14 +13,16 @@ import { ImageService } from '../../services/imageservice.service'
 export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
-  }
-  public PeopleList: People[] | undefined;
-
-  constructor(private _PeopleService: PeopleService, private _ImageService: ImageService) {
     this.getPeoples();
   }
 
-  @Input() public items: People[] = [];
+  public PeopleList: any = [];
+
+  constructor(private _PeopleService: PeopleService, private _ImageService: ImageService) {
+    
+  }
+
+  //@Input() public items: People[] = [];
 
   public readonly filters: PeopleFilter[] = [
     <PeopleFilter>{ gender: 'Male' },
@@ -29,28 +31,34 @@ export class HomeComponent implements OnInit {
 
   public activeFilters: PeopleFilter[] = [];
 
-  public itemsAfterFilter(): People[] {
-    return this.items.filter((item: People) => {
-      const matchesActiveFilter: boolean = this.activeFilters.reduce((prev, curr) => {
-        //if (item.gender.includes(curr.gender)) {
-        //  return prev && true;
-        //} else {
-        //  return false;
-        //}
-        return true;
-      }, true);
+  //public itemsAfterFilter(): People[] {
+  //  return this.PeopleList.filter((item: People) => {
+  //    const matchesActiveFilter: boolean = this.activeFilters.reduce((prev, curr) => {
+  //      //if (item.gender.includes(curr.gender)) {
+  //      //  return prev && true;
+  //      //} else {
+  //      //  return false;
+  //      //}
+  //      return true;
+  //    }, true);
 
-      return matchesActiveFilter;
-    });
-  }
+  //    return matchesActiveFilter;
+  //  });
+  //}
 
   getPeoples() {
-    debugger;
     this._PeopleService.getPeoples().subscribe(
-      data => this.PeopleList = data
+      data => {
+        this.PeopleList = data;
+        
+      }
     )
-    debugger;
-    console.log(this.PeopleList);
+   
 
   }
+
+
+//  this.masterDataService.getSiteExceptions(this.siteCodes).subscribe(res => {
+//this.siteCodeDetails = res;
+//this.setContiguityErrorsForOrders();
 }

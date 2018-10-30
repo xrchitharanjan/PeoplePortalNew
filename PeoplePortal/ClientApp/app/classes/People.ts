@@ -8,7 +8,6 @@ export interface People {
   surname?: string;
   age?: string;
   gender?: Gender[];
-  picture?: string;
 }
 
 export interface PeopleFilter {

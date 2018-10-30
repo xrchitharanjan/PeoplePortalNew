@@ -16,7 +16,7 @@ export class PeopleListComponent implements OnInit {
   ngOnInit(): void {
   }
   @Input()
-  public PeopleList: People[] = [];
+  public PplList: any = [];
 
   constructor(private peopleServices: PeopleService, private imageServices: ImageService) {
     //peopleServices.getPeoples()
