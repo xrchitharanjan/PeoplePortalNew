@@ -7,11 +7,12 @@
     font-weight: bold;
 }
 .list-people-cover{
-    background-color:blueviolet;
-    
+    display:flex;
+    justify-content:center;
+    flex-flow:row wrap;
+    align-content:flex-end;
 }
 .list-people{
-    background-color:aqua;
 
 }
 
