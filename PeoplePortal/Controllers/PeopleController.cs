@@ -22,7 +22,14 @@ namespace PeoplePortal.Controllers
         public IEnumerable<PeopleDto> Index()
         {
             return ppl.GetAllPeople();
-        }        
+        }
+
+        [HttpGet]
+        [Route("peopledata")]
+        public IEnumerable<PeopleDto> GetAllPeopleDetails()
+        {
+            return ppl.GetAllPeopleDetails();
+        }
 
         [HttpPost]
         [Route("Create")]

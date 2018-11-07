@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using PeoplePortal.ViewModel;
+using System.Text;
 
 namespace PeoplePortal.DataAccess
 {
@@ -12,17 +13,19 @@ namespace PeoplePortal.DataAccess
     {
         PeoplePortalDBContext db = new PeoplePortalDBContext();
 
+
         public IEnumerable<PeopleDto> GetAllPeople()
         {
             try
             {
-                return db.People.Select(x=>
-                new PeopleDto {
+                return db.People.Select(x =>
+                new PeopleDto
+                {
                     Id = x.Id,
                     FirstName = x.FirstName,
                     Gender = x.Gender,
                     ImageFile = null,
-                    IsProfilePic =true,
+                    IsProfilePic = true,
                     MiddleName = x.MiddleName,
                     OrganisationId = x.OrganisationId,
                     SurName = x.SurName,
@@ -34,6 +37,54 @@ namespace PeoplePortal.DataAccess
             {
                 throw;
             }
+
+        }
+        public IEnumerable<PeopleDto> GetAllPeopleDetails()
+        {
+            try
+            {
+                var result = from p in db.People
+                             join img in db.Images on p.Id equals img.PeopleId
+                             where img.IsProfilePic
+                             select new
+                             {
+                                 p.Id,
+                                 p.FirstName,
+                                 p.Gender,
+                                 ProfileImg = GetBase64Image(img.ImageFile),
+                                 p.MiddleName,
+                                 p.OrganisationId,
+                                 p.SurName,
+                                 p.UserId
+                             };
+
+                return result.Select(x => new PeopleDto
+                {
+                    Id = x.Id,
+                    FirstName = x.FirstName,
+                    Gender = x.Gender,
+                    ImageFile = x.ProfileImg,
+                    IsProfilePic = true,
+                    MiddleName = x.MiddleName,
+                    OrganisationId = x.OrganisationId,
+                    SurName = x.SurName,
+                    UserId = x.UserId
+
+                }).OrderBy(x => x.FirstName).ToList();
+
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        private string GetBase64Image(byte[] image)
+        {
+            StringBuilder base64 = new StringBuilder("data:image/jpeg;base64,");
+            base64.Append(Convert.ToBase64String(image));
+            return (base64.ToString());
+            //return Convert.ToBase64String(image);
         }
 
         //To Add new People record 
@@ -41,13 +92,14 @@ namespace PeoplePortal.DataAccess
         {
             try
             {
-                People People = new People {
+                People People = new People
+                {
                     FirstName = PeopleDto.FirstName,
                     MiddleName = PeopleDto.MiddleName,
                     SurName = PeopleDto.SurName,
                     OrganisationId = PeopleDto.OrganisationId,
                     Gender = PeopleDto.Gender,
-                    UserId = PeopleDto.UserId,                   
+                    UserId = PeopleDto.UserId,
                 };
                 //Images img = new Images
                 //{
@@ -56,7 +108,7 @@ namespace PeoplePortal.DataAccess
                 //   IsProfilePic = PeopleDto.IsProfilePic,                  
                 //};
                 //People.Images.Add(img);
-               
+
 
                 db.People.Add(People);
                 db.SaveChanges();
@@ -116,6 +168,6 @@ namespace PeoplePortal.DataAccess
             }
         }
 
-       
+
     }
 }

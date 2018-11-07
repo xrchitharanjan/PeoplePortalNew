@@ -47,10 +47,9 @@ export class HomeComponent implements OnInit {
   //}
 
   getPeoples() {
-    this._PeopleService.getPeoples().subscribe(
-      data => {
-        this.PeopleList = data;
-        
+    this._PeopleService.getPeopleData().subscribe(
+      data => {  
+        this.PeopleList = data;        
       }
     )
    

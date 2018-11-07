@@ -7,7 +7,8 @@
   <div class="list-people" *ngFor="let item of PplList">
     <spa-people [id]="item.id"
                 [firstname]="item.firstName"
-                [gender]="item.gender">
+                [gender]="item.gender"
+                [profilepic] ="item.imageFile">
     </spa-people>
   </div>
 </div>

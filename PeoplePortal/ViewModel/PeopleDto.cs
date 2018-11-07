@@ -13,7 +13,7 @@ namespace PeoplePortal.ViewModel
         public string SurName { get; set; }
         public string Gender { get; set; }
         public string MiddleName { get; set; }
-        public object  ImageFile { get; set; }
+        public string  ImageFile { get; set; }
         public bool IsProfilePic { get; set; }
         public int UserId { get; set; }
     }

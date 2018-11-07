@@ -7,6 +7,7 @@ export interface People {
   middlename?: string;
   surname?: string;
   age?: string;
+  profilepic?: string;
   gender?: Gender[];
 }
 

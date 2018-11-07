@@ -57,6 +57,7 @@
     "webpack": "4.22.0",
     "webpack-hot-middleware": "2.24.3",
     "webpack-merge": "4.1.4",
-    "zone.js": "0.8.26"
+    "zone.js": "0.8.26",
+    "font-awesome": "4.7.0"
   }
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -28,7 +29,7 @@ namespace PeoplePortal.Controllers
 
         [HttpGet]
         [Route("profilepic/{peopleId}")]
-        public List<ImageDto> GetImages(int PeopleId)
+        public IActionResult GetImages(int PeopleId)
         {
             var data = imgsRepo.GetAllImagesByPeople(PeopleId);
             var result = data.Select(p => new ImageDto
@@ -41,8 +42,47 @@ namespace PeoplePortal.Controllers
                 IsProfilePic = p.IsProfilePic
                 
             }).ToList();
-            return result;
+            return new ObjectResult(result);
         }
+
+        [HttpGet]
+        [Route("profileimage/{peopleId}")]
+        public string GetProfileImage(int PeopleId)
+        {
+            var data = imgsRepo.GetAllImagesByPeople(PeopleId);
+            var result = data.Select(p => new ImageDto
+            {
+                PeopleId = p.PeopleId,
+                FileName = p.FileName,
+                Id = p.Id,
+                ImageDescription = p.ImageDescription,
+                ImageFile = Convert.ToBase64String(p.ImageFile),
+                IsProfilePic = p.IsProfilePic
+
+            }).FirstOrDefault();
+            StringBuilder base64 =  new StringBuilder("data:image/jpeg;base64,");
+            base64.Append(result.ImageFile);
+            return (base64.ToString());
+        }
+        [HttpGet]
+        [Route("profileimageasblob/{peopleId}")]
+        public string GetProfileBlobImage(int PeopleId)
+        {
+            var data = imgsRepo.GetAllImagesByPeople(PeopleId);
+            var result = data.Select(p => new ImageDto
+            {
+                PeopleId = p.PeopleId,
+                FileName = p.FileName,
+                Id = p.Id,
+                ImageDescription = p.ImageDescription,
+                ImageFile = Convert.ToBase64String(p.ImageFile),
+                IsProfilePic = p.IsProfilePic
+
+            }).FirstOrDefault();
+            return (result.ImageFile);
+        }
+
+
 
         [HttpGet]
         [Route("allImages/{peopleId}")]
