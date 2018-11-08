@@ -10,6 +10,7 @@ import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { FetchPeopleComponent } from './components/fetchPeople/fetchPeople.component'
 import { createPeople } from './components/addPeople/AddPeople.component'
+import { viewPeople } from './components/viewPeople/viewPeople.component'
 import { PeopleComponent } from './components/people/people.component'
 import { PeopleListComponent } from './components/peoplelist/peoplelist.component'
 
@@ -21,7 +22,8 @@ import { PeopleListComponent } from './components/peoplelist/peoplelist.componen
     FetchPeopleComponent,
     createPeople,
     PeopleComponent,
-    PeopleListComponent
+    PeopleListComponent,
+    viewPeople
   ],
   imports: [
     CommonModule,
@@ -34,6 +36,7 @@ import { PeopleListComponent } from './components/peoplelist/peoplelist.componen
       { path: 'fetch-People', component: FetchPeopleComponent },
       { path: 'register-People', component: createPeople },
       { path: 'People/edit/:id', component: createPeople },
+      { path: 'People/view/:id', component: viewPeople },
       { path: '**', redirectTo: 'home' }
     ])
   ],

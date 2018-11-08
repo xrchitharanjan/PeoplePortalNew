@@ -37,6 +37,12 @@ export class PeopleService {
       .catch(this.errorHandler)
   }
 
+  getPeopleDetails(id: number) {
+    return this._http.get(this.myAppUrl + "api/People/PeopleDetails/" + id)
+      .map((response: Response) => response.json())
+      .catch(this.errorHandler)
+  }
+
   savePeople(People) {
     return this._http.post(this.myAppUrl + 'api/People/Create', People)
       .map((response: Response) => response.json())

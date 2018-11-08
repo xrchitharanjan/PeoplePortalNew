@@ -11,6 +11,7 @@ namespace PeoplePortal.DataAccess
         public virtual DbSet<Departments> Departments { get; set; }
         public virtual DbSet<People> People { get; set; }
         public virtual DbSet<Images> Images { get; set; }
+        public virtual DbSet<PeopleProfile> PeopleProfile { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

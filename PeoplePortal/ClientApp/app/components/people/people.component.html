@@ -1,18 +1,9 @@
-<div class="people-block thumbnail">
-  <div class="people-image">
-    <!--<i class="fa fa-picture-o fa-6"></i>-->
-    <!--<img [src]="ProfilePicUrl" width="200" alt="your image" class="img-thumbnail"/>-->
+<div class="people-block">
+  <div class="thumbnail people-image">
     <img [src]="profilepic" alt="your image" class="img-thumbnail" />
-
-
-    <!--<img [src]= "ProfilePicUrl" width="200" *ngIf="ProfilePicUrl" alt="your image" />-->
   </div>
-  <div class="item-name">
-   <!-- <a routerLink="/people/details/{{id}}">{{firstname}}</a>-->
-    <a routerLink="/people/details/{{id}}"></a>
-  </div>
-
   <div class="people-name">
-    {{firstname}}
+    <a [routerLink]="['/People/view/', id]">{{firstname}}</a>
   </div>
+
 </div>

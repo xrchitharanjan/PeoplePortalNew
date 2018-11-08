@@ -16,5 +16,9 @@ namespace PeoplePortal.ViewModel
         public string  ImageFile { get; set; }
         public bool IsProfilePic { get; set; }
         public int UserId { get; set; }
+
+        public string Designation { get; set; }
+        public string ProfileDescription { get; set; }
+        public string Hobbies { get; set; }
     }
 }

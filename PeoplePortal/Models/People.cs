@@ -14,6 +14,6 @@ namespace PeoplePortal.Models
         public string Gender { get; set; }
         public string MiddleName { get; set; }
         public int UserId { get; set; }      
-        public List<Images> Images { get; set; }
+        public PeopleProfile PeopleProfile { get; set; }
     }
 }

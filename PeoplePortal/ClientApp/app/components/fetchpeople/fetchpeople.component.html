@@ -20,16 +20,16 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let emp of peopleList">
-      <td>{{ emp.Id }}</td>
-      <td>{{ emp.firstName }}</td>
-      <td>{{ emp.middleName }}</td>
-      <td>{{ emp.surName }}</td>
-      <td>{{ emp.gender }}</td>
+    <tr *ngFor="let ppl of peopleList">
+      <td>{{ ppl.Id }}</td>
+      <td>{{ ppl.firstName }}</td>
+      <td>{{ ppl.middleName }}</td>
+      <td>{{ ppl.surName }}</td>
+      <td>{{ ppl.gender }}</td>
       <td>
       <td>
-        <a [routerLink]="['/People/edit/', emp.PeopleId]">Edit</a> |
-        <a [routerLink]="" (click)="delete(emp.PeopleId)">Delete</a>
+        <a [routerLink]="['/People/edit/', ppl.Id]">Edit</a> |
+        <a [routerLink]="" (click)="delete(ppl.Id)">Delete</a>
       </td>
     </tr>
   </tbody>

@@ -152,6 +152,52 @@ namespace PeoplePortal.DataAccess
             }
         }
 
+        public PeopleDto GetPeople(int peopleId)
+        {
+            try
+            {
+                var result = from p in db.People
+                             join img in db.Images on p.Id equals img.PeopleId
+                             where p.Id== peopleId && img.IsProfilePic
+                             select new
+                             {
+                                 p.Id,
+                                 p.FirstName,
+                                 p.Gender,
+                                 ProfileImg = GetBase64Image(img.ImageFile),
+                                 p.MiddleName,
+                                 p.OrganisationId,
+                                 p.SurName,
+                                 p.UserId,
+                                 p.PeopleProfile.ProfileDescription,
+                                 p.PeopleProfile.Hobbies,
+                                 p.PeopleProfile.Designation
+                             };
+
+                return result.Select(x => new PeopleDto
+                {
+                    Id = x.Id,
+                    FirstName = x.FirstName,
+                    Gender = x.Gender,
+                    ImageFile = x.ProfileImg,
+                    IsProfilePic = true,
+                    MiddleName = x.MiddleName,
+                    OrganisationId = x.OrganisationId,
+                    SurName = x.SurName,
+                    UserId = x.UserId,
+                    Designation = x.Designation,
+                    Hobbies=x.Hobbies,
+                    ProfileDescription = x.ProfileDescription
+
+                }).FirstOrDefault();
+
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         //To Delete the record on a particular People
         public int DeletePeople(int id)
         {

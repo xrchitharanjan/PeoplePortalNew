@@ -1,19 +1,26 @@
 ﻿.people-image {
     font-size: 6em;
     color: lightgray;
+    min-width: 100%;
+    min-height: 100%;
+    height: auto;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
 }
 
 .people-name {
     font-weight: bold;
+    align-content:center;
+    text-align:center;
 }
 
 .people-block {
-    height: 220px;
-    width:200px;
-    background-color:chocolate;
-    max-width:250px;
-    margin-left:10px;
-    margin-right:10px;
-    
+    height: 180px;
+    width: 160px;
+    max-height:180px;
+    max-width:160px;
+    margin-left: 5px;
+    margin-right: 5px;
+    object-fit: cover;
 }
-

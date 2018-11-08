@@ -45,6 +45,13 @@ namespace PeoplePortal.Controllers
         {
             return ppl.GetPeopleData(id);
         }
+        [HttpGet]
+        [Route("PeopleDetails/{peopleId}")]
+        public PeopleDto GetPeople(int peopleId)
+        {
+            var result =  ppl.GetPeople(peopleId);
+            return result;
+        }
 
         [HttpPut]
         [Route("Edit")]

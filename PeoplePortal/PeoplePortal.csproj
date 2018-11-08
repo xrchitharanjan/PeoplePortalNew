@@ -28,6 +28,7 @@
     <None Remove="ClientApp\app\components\fetchpeople\fetchpeople.component.ts" />
     <None Remove="ClientApp\app\components\peoplelist\peoplelist.component.ts" />
     <None Remove="ClientApp\app\components\people\people.component.ts" />
+    <None Remove="ClientApp\app\components\viewPeople\viewpeople.component.ts" />
     <None Remove="ClientApp\app\Services\imageservice.service.ts" />
     <None Remove="ClientApp\app\Services\peopleservice.service.ts" />
   </ItemGroup>
@@ -37,8 +38,13 @@
     <TypeScriptCompile Include="ClientApp\app\components\people\people.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\addpeople\addpeople.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\fetchpeople\fetchpeople.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\viewPeople\viewpeople.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\Services\imageservice.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\Services\peopleservice.service.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\app\Images\" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
