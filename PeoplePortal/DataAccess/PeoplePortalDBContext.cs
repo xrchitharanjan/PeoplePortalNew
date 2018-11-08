@@ -3,6 +3,8 @@ using PeoplePortal.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace PeoplePortal.DataAccess
 {
@@ -15,10 +17,16 @@ namespace PeoplePortal.DataAccess
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            var builder = new ConfigurationBuilder()
+                      .SetBasePath(Directory.GetCurrentDirectory())
+                      .AddJsonFile("appsettings.json");
+            var config = builder.Build();
+            var connectionString = config.GetConnectionString("PeoplePortalConnectionString");
+
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer(@"Password=xpouser;Persist Security Info=True;User ID=xpouser;Initial Catalog=PeoplePortal;Data Source=IDDDW0413.devxpo.pvt;");
+                optionsBuilder.UseSqlServer(connectionString);
+                //optionsBuilder.UseSqlServer(@"Password=xpouser;Persist Security Info=True;User ID=xpouser;Initial Catalog=PeoplePortal;Data Source=IDDDW0413.devxpo.pvt;");
             }
         }
 
