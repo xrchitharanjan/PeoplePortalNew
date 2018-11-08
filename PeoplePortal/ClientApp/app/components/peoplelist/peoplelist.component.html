@@ -3,7 +3,7 @@
                        [activatedFilters]="activeFilters"
                        (activeFilters)="updateActivatedFilters($event)"></spa-product-filters>
 </div>-->
-<div class="list-people-cover container">
+<div class="list-people-cover align-items-start">
   <div class="list-people" *ngFor="let item of PplList">
     <spa-people [id]="item.id"
                 [firstname]="item.firstName"

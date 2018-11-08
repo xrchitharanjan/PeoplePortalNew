@@ -13,6 +13,7 @@ import { createPeople } from './components/addPeople/AddPeople.component'
 import { viewPeople } from './components/viewPeople/viewPeople.component'
 import { PeopleComponent } from './components/people/people.component'
 import { PeopleListComponent } from './components/peoplelist/peoplelist.component'
+import { NewsComponent } from './components/news/news.component'
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { PeopleListComponent } from './components/peoplelist/peoplelist.componen
     createPeople,
     PeopleComponent,
     PeopleListComponent,
-    viewPeople
+    viewPeople,
+    NewsComponent
   ],
   imports: [
     CommonModule,

@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   }
 
   public PeopleList: any = [];
+  public StarList: any = [];
 
   constructor(private _PeopleService: PeopleService, private _ImageService: ImageService) {
     
@@ -49,7 +50,9 @@ export class HomeComponent implements OnInit {
   getPeoples() {
     this._PeopleService.getPeopleData().subscribe(
       data => {  
-        this.PeopleList = data;        
+        this.PeopleList = data;
+        this.StarList = this.PeopleList.filter(
+          book => book.firstName==="Ranjith");
       }
     )
    

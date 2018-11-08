@@ -1,15 +1,23 @@
-<div class="container-fluid">
+<div class="container-fluid row navbar-static-top">
   <div class="container xpo-banner">
     <img src="../../Images/XPO_Logo.png" class="xpologo" />
   </div>
   <div class='clearfix'></div>
-  <div>
-    <p>News of the day...</p>
+  <div class="row">
+    <spa-news></spa-news>
   </div>
-  <div class='clearfix'></div>
-  <div class="container-fluid">
-    <div class="container">
+  <div class="container-fluid row">
+    <div class="container col-md-12">
+      <h1>Star Performers</h1>
       <spa-people-list [PplList]="PeopleList"></spa-people-list>
+    </div>
+    <div class="clearfix"></div>
+    <div class="container-fluid row">
+      <h1>Shout outs</h1>
+      <div class="col-md-12">
+        <spa-people-list [PplList]="StarList"></spa-people-list>
+
+      </div>
     </div>
   </div>
 </div>

@@ -10,5 +10,8 @@
 }
 .xpo-banner{
     border:medium;
-    border-width:medium;    
+    border-width:medium; 
+    height:60px;
+    padding-bottom:-20px;
+
 }
